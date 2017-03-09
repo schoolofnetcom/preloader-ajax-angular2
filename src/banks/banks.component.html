@@ -1,0 +1,39 @@
+<div class="row">
+  <div class="content-header">
+    <h1>Contas bancárias <small>Gerenciamento de contas</small></h1>
+    <div class="grey-text">
+      <small>
+        <a href="">iFinance</a> >
+        <span>Suas contas</span>
+      </small>
+    </div>
+  </div>
+
+  <div class="card col s12">
+    <div class="card-content">
+      <search [resource]="'banks'" (onSearch)="searched($event)"></search>
+      <table class="highlight">
+        <thead>
+          <tr>
+            <th>contas</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr *ngFor="let bank of banks.data">
+            <td>
+              {{ bank.title }} - {{ bank.code }}
+            </td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+</div>
+
+<paginate
+  (onChangePage)="pageChanged($event)"
+  [total]="banks.total"
+  [activePage]="banks.current_page"
+  [totalPage]="banks.last_page"
+  [resource]="'banks'"
+></paginate>
